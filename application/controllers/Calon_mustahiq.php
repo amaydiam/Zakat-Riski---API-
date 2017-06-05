@@ -54,23 +54,29 @@ class Calon_mustahiq extends CI_Controller
         $id_calon_mustahiq = $this->input->post('id_calon_mustahiq');
         $nama_calon_mustahiq = $this->input->post('nama_calon_mustahiq');
         $alamat_calon_mustahiq = $this->input->post('alamat_calon_mustahiq');
+        $latitude_calon_mustahiq = $this->input->post('longitude_calon_mustahiq');
+        $longitude_calon_mustahiq = $this->input->post('alamat_calon_mustahiq');
         $no_identitas_calon_mustahiq = $this->input->post('no_identitas_calon_mustahiq');
         $no_telp_calon_mustahiq = $this->input->post('no_telp_calon_mustahiq');
-        $status_calon_mustahiq = $this->input->post('status_calon_mustahiq');
+        $nama_perekomendasi_calon_mustahiq= $this->input->post('nama_perekomendasi_calon_mustahiq');
         $response['isSuccess'] = false;
         $response['message'] = "Error";
         if ($nama_calon_mustahiq != null
             || $alamat_calon_mustahiq != null
+            || $latitude_calon_mustahiq != null
+            || $longitude_calon_mustahiq != null
             || $no_identitas_calon_mustahiq != null
             || $no_telp_calon_mustahiq != null
-            || $status_calon_mustahiq != null
+            || $nama_perekomendasi_calon_mustahiq!= null
         ) {
             $calon_mustahiq = array(
                 'nama_calon_mustahiq' => $nama_calon_mustahiq,
                 'alamat_calon_mustahiq' => $alamat_calon_mustahiq,
+                'latitude_calon_mustahiq' => $latitude_calon_mustahiq,
+                'longitude_calon_mustahiq' => $longitude_calon_mustahiq,
                 'no_identitas_calon_mustahiq' => $no_identitas_calon_mustahiq,
                 'no_telp_calon_mustahiq' => $no_telp_calon_mustahiq,
-                'status_calon_mustahiq' => $status_calon_mustahiq
+                'nama_perekomendasi_calon_mustahiq' => $nama_perekomendasi_calon_mustahiq
 
             );
 
