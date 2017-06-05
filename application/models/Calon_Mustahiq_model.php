@@ -18,25 +18,7 @@ class Calon_mustahiq_model extends CI_Model
 
     public function insertcalon_mustahiq($calon_mustahiq)
     {
-		//$id_nasabah = $calon_mustahiq[''];
-		$nama_nasabah = $calon_mustahiq['nama_calon_mustahiq'];
-		$alamat = $calon_mustahiq['alamat_calon_mustahiq'];
-		//$jenis_kelamin = $calon_mustahiq[];
-		$no_telp = $calon_mustahiq['no_telp_calon_mustahiq'];
-		//$status = $calon_mustahiq[];
-		//$pekerjaan = $calon_mustahiq[];
-		//$jenis_identitas = $calon_mustahiq[];
-		$no_identitas = $calon_mustahiq['no_identitas_calon_mustahiq'];
-		//$nama_ibu = $calon_mustahiq[];
-		//$agama = $calon_mustahiq[''];
-		//$tempat_tanggal_lahir = $calon_mustahiq[];
-		$status_aktif = $calon_mustahiq['status_calon_mustahiq'];
-		
-        $query = $this->db->insert('calon_mustahiq', $calon_mustahiq);//via db config ci
-		
-		$kueri = "insert into `nusantara`.`nasabah` (`id_nasabah`, `nama_nasabah`,`alamat`, `no_telp`, `no_identitas`, `status_aktif`) 
-		VALUES ('', '$nama_nasabah', '$alamat','$no_telp','$no_identitas', '$status_aktif')";
-		mysqli_query ($this->db_conn(),$kueri);
+        $query = $this->db->insert('calon_mustahiq', $calon_mustahiq);
         return $query;
     }
 

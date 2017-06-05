@@ -54,8 +54,8 @@ class Calon_mustahiq extends CI_Controller
         $id_calon_mustahiq = $this->input->post('id_calon_mustahiq');
         $nama_calon_mustahiq = $this->input->post('nama_calon_mustahiq');
         $alamat_calon_mustahiq = $this->input->post('alamat_calon_mustahiq');
-        $latitude_calon_mustahiq = $this->input->post('longitude_calon_mustahiq');
-        $longitude_calon_mustahiq = $this->input->post('alamat_calon_mustahiq');
+        $latitude_calon_mustahiq = $this->input->post('latitude_calon_mustahiq');
+        $longitude_calon_mustahiq = $this->input->post('longitude_calon_mustahiq');
         $no_identitas_calon_mustahiq = $this->input->post('no_identitas_calon_mustahiq');
         $no_telp_calon_mustahiq = $this->input->post('no_telp_calon_mustahiq');
         $nama_perekomendasi_calon_mustahiq= $this->input->post('nama_perekomendasi_calon_mustahiq');

@@ -28,6 +28,7 @@ class Donasi_model extends CI_Model
             muzaki.*,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
+                        mustahiq.jumlah_rekomendasi,
                         calon_mustahiq.*,
                         amil_zakat.*");
         $this->db->from('donasi');
@@ -56,6 +57,7 @@ class Donasi_model extends CI_Model
             muzaki.*,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
+                        mustahiq.jumlah_rekomendasi,
                         calon_mustahiq.*,
                         amil_zakat.*");
         $this->db->from('donasi');

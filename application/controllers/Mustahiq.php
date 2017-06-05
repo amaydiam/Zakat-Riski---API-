@@ -129,4 +129,15 @@ class Mustahiq extends CI_Controller
     }
 
 
+    function addrekomendasi($id)
+    {
+        $response['isSuccess'] = true;
+        $response['message'] = "berhasil merekomendasikan mustahiq";
+        $this->Mustahiq_model->addrekomendasi($id);
+        echo json_encode($response);
+    }
+
+
+
+
 }
