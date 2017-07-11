@@ -91,10 +91,11 @@ class Calon_mustahiq_model extends CI_Model
     }
     public function getLastcalon_mustahiq()
     {
-        $this->db
-            ->select("calon_mustahiq.*");
 
+        $this->db
+            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq");
         $this->db->from('calon_mustahiq');
+        $this->db->join('user', 'user.id_user = calon_mustahiq.id_user_perekomendasi');
         $this->db->order_by('calon_mustahiq.id_calon_mustahiq', 'DESC');
         $this->db->limit(1, 0);
         $query = $this->db->get();
