@@ -58,6 +58,8 @@ class Mustahiq_model extends CI_Model
                         mustahiq.status_mustahiq,
                         mustahiq.jumlah_rekomendasi,
                          calon_mustahiq.*,
+                        calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
+                        (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
                         amil_zakat.*,
             (SELECT waktu_donasi FROM donasi WHERE id_mustahiq=idnya  ORDER BY id_donasi DESC LIMIT 0,1) AS waktu_terakhir_donasi");
         $this->db->from('mustahiq');
@@ -90,7 +92,9 @@ class Mustahiq_model extends CI_Model
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
                         mustahiq.jumlah_rekomendasi,
-                         calon_mustahiq.*,
+                        calon_mustahiq.*,
+                        calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
+                        (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
                         amil_zakat.*,
             (SELECT waktu_donasi FROM donasi WHERE id_mustahiq=idnya  ORDER BY id_donasi DESC LIMIT 0,1) AS waktu_terakhir_donasi,
             ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians(latitude_calon_mustahiq) ) *
@@ -125,6 +129,9 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
                         mustahiq.jumlah_rekomendasi,
                          calon_mustahiq.*,
                         amil_zakat.*,
+                        calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
+                        (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
+
             (SELECT waktu_donasi FROM donasi WHERE id_mustahiq=idnya  ORDER BY id_donasi DESC LIMIT 0,1) AS waktu_terakhir_donasi");
         $this->db->from('mustahiq');
         $this->db->join('calon_mustahiq', 'calon_mustahiq.id_calon_mustahiq = mustahiq.id_calon_mustahiq');
@@ -145,6 +152,9 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
                         mustahiq.jumlah_rekomendasi,
                          calon_mustahiq.*,
                         amil_zakat.*,
+                        calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
+                        (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
+
             (SELECT waktu_donasi FROM donasi WHERE id_mustahiq=idnya  ORDER BY id_donasi DESC LIMIT 0,1) AS waktu_terakhir_donasi");
         $this->db->from('mustahiq');
         $this->db->join('calon_mustahiq', 'calon_mustahiq.id_calon_mustahiq = mustahiq.id_calon_mustahiq');
@@ -165,6 +175,9 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
                         mustahiq.jumlah_rekomendasi,
                          calon_mustahiq.*,
                         amil_zakat.*,
+                        calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
+                        (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
+
             (SELECT waktu_donasi FROM donasi WHERE id_mustahiq=idnya  ORDER BY id_donasi DESC LIMIT 0,1) AS waktu_terakhir_donasi");
         $this->db->from('mustahiq');
         $this->db->join('calon_mustahiq', 'calon_mustahiq.id_calon_mustahiq = mustahiq.id_calon_mustahiq');
@@ -187,7 +200,7 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
    function addrekomendasi($id)
     {
         $this->db->where('id_mustahiq', $id);
-        $this->db->set('jumlah_rekomendasi', '`jumlah_rekomendasi`+ 1', FALSE);
+        $this->db->set('jumlah_rekomendasi', 'jumlah_rekomendasi+ 1', FALSE);
         $this->db->update('mustahiq');
     }
 

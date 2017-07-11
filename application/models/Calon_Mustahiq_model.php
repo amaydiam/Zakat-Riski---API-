@@ -51,8 +51,9 @@ class Calon_mustahiq_model extends CI_Model
         $limit = "10";
         $start = ($page - 1) * $limit;
         $this->db
-            ->select("calon_mustahiq.*");
+            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq");
         $this->db->from('calon_mustahiq');
+        $this->db->join('user', 'user.id_user = calon_mustahiq.id_user_perekomendasi');
         $this->db->where("id_calon_mustahiq NOT IN (select id_calon_mustahiq from mustahiq)");
         if($keyword!=null){
             $this->db->like('calon_mustahiq.alamat_calon_mustahiq', $keyword);
@@ -80,9 +81,9 @@ class Calon_mustahiq_model extends CI_Model
     public function getcalon_mustahiqById($id_calon_mustahiq)
     {
         $this->db
-            ->select("calon_mustahiq.*");
-
+            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq");
         $this->db->from('calon_mustahiq');
+        $this->db->join('user', 'user.id_user = calon_mustahiq.id_user_perekomendasi');
         $this->db->where('calon_mustahiq.id_calon_mustahiq', $id_calon_mustahiq);
         $query = $this->db->get();
 
