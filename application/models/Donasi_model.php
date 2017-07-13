@@ -28,7 +28,8 @@ class Donasi_model extends CI_Model
             muzaki.*,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                         calon_mustahiq.*,
                         amil_zakat.*");
         $this->db->from('donasi');
@@ -57,7 +58,8 @@ class Donasi_model extends CI_Model
             muzaki.*,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                         calon_mustahiq.*,
                         amil_zakat.*");
         $this->db->from('donasi');

@@ -56,7 +56,8 @@ class Mustahiq_model extends CI_Model
             ->select("mustahiq.id_mustahiq as idnya,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                          calon_mustahiq.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
@@ -91,7 +92,8 @@ class Mustahiq_model extends CI_Model
             ->select("mustahiq.id_mustahiq as idnya,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                         calon_mustahiq.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
@@ -126,7 +128,8 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
             ->select("mustahiq.id_mustahiq as idnya,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                          calon_mustahiq.*,
                         amil_zakat.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
@@ -149,7 +152,8 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
             ->select("mustahiq.id_mustahiq as idnya,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                          calon_mustahiq.*,
                         amil_zakat.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
@@ -172,7 +176,8 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
             ->select("mustahiq.id_mustahiq as idnya,
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
-                        mustahiq.jumlah_rekomendasi,
+                        mustahiq.id_mustahiq as idm,
+                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
                          calon_mustahiq.*,
                         amil_zakat.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
@@ -197,11 +202,6 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
         $this->db->delete('mustahiq');
     }
 
-   function addrekomendasi($id)
-    {
-        $this->db->where('id_mustahiq', $id);
-        $this->db->set('jumlah_rekomendasi', 'jumlah_rekomendasi+ 1', FALSE);
-        $this->db->update('mustahiq');
-    }
+
 
 }
