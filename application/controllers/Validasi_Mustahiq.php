@@ -2,16 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @property Rekomendasi_Mustahiq_model $Rekomendasi_Mustahiq_model
+ * @property Validasi_Mustahiq_model $Validasi_Mustahiq_model
  * @property Mustahiq_model $Mustahiq_model
  */
-class Rekomendasi_mustahiq extends CI_Controller
+class Validasi_mustahiq extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('Rekomendasi_Mustahiq_model', '', TRUE);
+        $this->load->model('Validasi_Mustahiq_model', '', TRUE);
         $this->load->model('Mustahiq_model', '', TRUE);
     }
 
@@ -22,7 +22,7 @@ class Rekomendasi_mustahiq extends CI_Controller
     }
 
 
-    function addrekomendasi()
+    function addvalidasi()
     {
 
         $id_mustahiq = $this->input->post('id_mustahiq');
@@ -35,20 +35,20 @@ class Rekomendasi_mustahiq extends CI_Controller
         if ($id_mustahiq != null
         ) {
 
-            $rekomendasi = array(
+            $validasi = array(
                 'id_mustahiq' => $id_mustahiq,
                 'id_user' => $id_user,
             );
-            $action_rekomendasi = $this->Rekomendasi_Mustahiq_model->insertrekomendasi($rekomendasi);
+            $action_validasi = $this->Validasi_Mustahiq_model->insertvalidasi($validasi);
 
-            if ($action_rekomendasi) {
+            if ($action_validasi) {
                 $response['isSuccess'] = true;
-                $response['message'] = "Mustahiq telah direkomendasi";
+                $response['message'] = "Mustahiq telah divalidasi";
                 $detail_mustahiq = $this->Mustahiq_model->getmustahiqById($id_mustahiq);
                 $response['mustahiq'] = $detail_mustahiq;
 
             } else {
-                $response['message'] = "Rekomendasi gagal";
+                $response['message'] = "Validasi gagal";
             }
 
 
