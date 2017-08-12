@@ -51,14 +51,22 @@ class Calon_mustahiq_model extends CI_Model
         $limit = "10";
         $start = ($page - 1) * $limit;
         $this->db
-            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq");
+            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq,
+            calon_mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating
+                      ");
         $this->db->from('calon_mustahiq');
         $this->db->join('user', 'user.id_user = calon_mustahiq.id_user_perekomendasi');
         $this->db->where("id_calon_mustahiq NOT IN (select id_calon_mustahiq from mustahiq)");
         if($keyword!=null){
+            $this->db->like('calon_mustahiq.nama_calon_mustahiq', $keyword);
+            $this->db->or_like('calon_mustahiq.nama_calon_mustahiq', $keyword, 'after');
+            $this->db->or_like('calon_mustahiq.nama_calon_mustahiq', $keyword, 'before');
+
             $this->db->like('calon_mustahiq.alamat_calon_mustahiq', $keyword);
             $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword, 'after');
             $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword, 'before');
+
             $this->db->group_by('calon_mustahiq.id_calon_mustahiq');
         }
         $this->db->order_by('calon_mustahiq.id_calon_mustahiq', 'DESC');
@@ -70,7 +78,9 @@ class Calon_mustahiq_model extends CI_Model
 
     public function get_all_calon_mustahiq()
     {  $this->db
-        ->select("calon_mustahiq.*");
+        ->select("calon_mustahiq.*,
+            calon_mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating");
 
         $this->db->from('calon_mustahiq');
         $query = $this->db->get();
@@ -81,7 +91,9 @@ class Calon_mustahiq_model extends CI_Model
     public function getcalon_mustahiqById($id_calon_mustahiq)
     {
         $this->db
-            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq");
+            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq,
+            calon_mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating");
         $this->db->from('calon_mustahiq');
         $this->db->join('user', 'user.id_user = calon_mustahiq.id_user_perekomendasi');
         $this->db->where('calon_mustahiq.id_calon_mustahiq', $id_calon_mustahiq);
@@ -93,7 +105,9 @@ class Calon_mustahiq_model extends CI_Model
     {
 
         $this->db
-            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq");
+            ->select("calon_mustahiq.*,user.nama AS nama_perekomendasi_calon_mustahiq,
+            calon_mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating");
         $this->db->from('calon_mustahiq');
         $this->db->join('user', 'user.id_user = calon_mustahiq.id_user_perekomendasi');
         $this->db->order_by('calon_mustahiq.id_calon_mustahiq', 'DESC');

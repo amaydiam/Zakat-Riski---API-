@@ -57,8 +57,9 @@ class Mustahiq_model extends CI_Model
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
                         mustahiq.id_mustahiq as idm,
-                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
-                         calon_mustahiq.*,
+                         mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating,
+                        calon_mustahiq.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
@@ -74,9 +75,14 @@ class Mustahiq_model extends CI_Model
             $this->db->where('mustahiq.status_mustahiq', "Aktif");
         }
         if ($keyword != null) {
+            $this->db->like('calon_mustahiq.nama_calon_mustahiq', $keyword);
+            $this->db->or_like('calon_mustahiq.nama_calon_mustahiq', $keyword, 'after');
+            $this->db->or_like('calon_mustahiq.nama_calon_mustahiq', $keyword, 'before');
+
             $this->db->like('calon_mustahiq.alamat_calon_mustahiq', $keyword);
             $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword, 'after');
             $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword, 'before');
+
             $this->db->group_by('mustahiq.id_mustahiq');
         }
         $this->db->order_by('mustahiq.id_mustahiq', 'DESC');
@@ -96,8 +102,10 @@ class Mustahiq_model extends CI_Model
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
                         mustahiq.id_mustahiq as idm,
-                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
-                        calon_mustahiq.*,
+                          mustahiq.id_calon_mustahiq as idcm,
+                         mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating,
+                       calon_mustahiq.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
@@ -135,8 +143,9 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
                         mustahiq.id_mustahiq as idm,
-                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
-                         calon_mustahiq.*,
+                         mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating,
+                        calon_mustahiq.*,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
                         FROM validasi_mustahiq INNER JOIN amil_zakat
                         ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
@@ -162,8 +171,9 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
                         mustahiq.id_mustahiq as idm,
-                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
-                         calon_mustahiq.*,
+                          mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating,
+                        calon_mustahiq.*,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
                         FROM validasi_mustahiq INNER JOIN amil_zakat
                         ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
@@ -189,8 +199,9 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
                         mustahiq.id_mustahiq,
                         mustahiq.status_mustahiq,
                         mustahiq.id_mustahiq as idm,
-                        (select avg(rating) from rating_mustahiq where rating_mustahiq.id_mustahiq=idm) as jumlah_rating,
-                         calon_mustahiq.*,
+                         mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating,
+                        calon_mustahiq.*,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
                         FROM validasi_mustahiq INNER JOIN amil_zakat
                         ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat

@@ -28,11 +28,11 @@ class Mustahiq extends CI_Controller
         echo json_encode($response);
     }
 
-    function mustahiq($page = null)
+    function mustahiq($page = null, $keyword = null)
     {
         $response['isSuccess'] = true;
         $response['message'] = "berhasil";
-        $response['mustahiq'] = $this->Mustahiq_model->get_mustahiq($page,false);
+        $response['mustahiq'] = $this->Mustahiq_model->get_mustahiq($page,false,$keyword);
         echo json_encode($response);
     }
 

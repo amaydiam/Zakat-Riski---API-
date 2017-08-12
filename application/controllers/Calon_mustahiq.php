@@ -28,11 +28,11 @@ class Calon_mustahiq extends CI_Controller
         echo json_encode($response);
     }
 
-    function calon_mustahiq($page = null)
+    function calon_mustahiq($page = null,$keyword=null)
     {
         $response['isSuccess'] = true;
         $response['message'] = "berhasil";
-        $response['calon_mustahiq'] = $this->Calon_mustahiq_model->get_calon_mustahiq($page);
+        $response['calon_mustahiq'] = $this->Calon_mustahiq_model->get_calon_mustahiq($page,$keyword);
         echo json_encode($response);
     }
 
