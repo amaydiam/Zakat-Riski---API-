@@ -13,6 +13,30 @@ class Validasi_Mustahiq_model extends CI_Model
         return $query;
     }
 
+    public function getValidasiByIdMustahiq($id_mustahiq)
+    {
+        $this->db
+            ->select("*");
+        $this->db->from('validasi_mustahiq');
+        $this->db->where('id_mustahiq', $id_mustahiq);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
+
+    public function getValidasiByIdMustahiqAndIdAmilZakat($id_mustahiq,$id_amil_zakat)
+    {
+        $this->db
+            ->select("*");
+        $this->db->from('validasi_mustahiq');
+        $this->db->where('id_mustahiq', $id_mustahiq);
+        $this->db->where('id_amil_zakat', $id_amil_zakat);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
 
 
 }

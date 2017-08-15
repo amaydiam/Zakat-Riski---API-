@@ -192,6 +192,34 @@ sin( radians(latitude_calon_mustahiq) ) ) ) AS distance");
         return $query->row_array();
     }
 
+    public function getmustahiqByIdCalonMustahiq($id_calon_mustahiq)
+    {
+        $this->db
+            ->select("mustahiq.id_mustahiq as idnya,
+                        mustahiq.id_mustahiq,
+                        mustahiq.status_mustahiq,
+                        mustahiq.id_mustahiq as idm,
+                          mustahiq.id_calon_mustahiq as idcm,
+                        (select avg(rating) from rating_calon_mustahiq where rating_calon_mustahiq.id_calon_mustahiq=idcm) as jumlah_rating,
+                        calon_mustahiq.*,
+                        (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
+                        FROM validasi_mustahiq INNER JOIN amil_zakat
+                        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
+                        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+                        WHERE validasi_mustahiq.id_mustahiq=idm )  AS nama_validasi_amil_zakat,
+                        calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
+                        (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
+
+            (SELECT waktu_donasi FROM donasi WHERE id_mustahiq=idnya  ORDER BY id_donasi DESC LIMIT 0,1) AS waktu_terakhir_donasi");
+        $this->db->from('mustahiq');
+        $this->db->join('calon_mustahiq', 'calon_mustahiq.id_calon_mustahiq = mustahiq.id_calon_mustahiq');
+        $this->db->where('calon_mustahiq.status_calon_mustahiq', "Aktif");
+        $this->db->where('mustahiq.id_calon_mustahiq', $id_calon_mustahiq);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
     public function getLastmustahiq()
     {
         $this->db
