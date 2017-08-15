@@ -43,7 +43,11 @@ class Donasi extends CI_Controller
         echo json_encode($response);
     }
 
-
+ function test(){
+     $data_donasi= $this->Donasi_model->getLastDonasi();
+     $response['donasi'] = $data_donasi;
+     echo json_encode($response);
+ }
 
     function adddonasi()
     {
