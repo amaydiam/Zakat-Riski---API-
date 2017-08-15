@@ -82,7 +82,7 @@ FROM
             $this->db->or_like('calon_mustahiq.nama_calon_mustahiq', $keyword, 'after');
             $this->db->or_like('calon_mustahiq.nama_calon_mustahiq', $keyword, 'before');
 
-            $this->db->like('calon_mustahiq.alamat_calon_mustahiq', $keyword);
+            $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword);
             $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword, 'after');
             $this->db->or_like('calon_mustahiq.alamat_calon_mustahiq', $keyword, 'before');
 
