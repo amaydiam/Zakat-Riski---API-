@@ -34,11 +34,14 @@ class Donasi_model extends CI_Model
                          calon_mustahiq.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
-                        (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
-                        FROM validasi_mustahiq INNER JOIN amil_zakat
-                        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
-                        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
-                        WHERE validasi_mustahiq.id_mustahiq=idm )  AS nama_validasi_amil_zakat ,
+                       (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat 
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat 
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -73,11 +76,14 @@ class Donasi_model extends CI_Model
                        calon_mustahiq.*,
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
-                        (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
-                        FROM validasi_mustahiq INNER JOIN amil_zakat
-                        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
-                        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
-                        WHERE validasi_mustahiq.id_mustahiq=idm )  AS nama_validasi_amil_zakat ,
+                       (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -104,10 +110,13 @@ class Donasi_model extends CI_Model
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
-                        FROM validasi_mustahiq INNER JOIN amil_zakat
-                        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
-                        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
-                        WHERE validasi_mustahiq.id_mustahiq=idm )  AS nama_validasi_amil_zakat ,
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -142,10 +151,13 @@ class Donasi_model extends CI_Model
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
                         (SELECT GROUP_CONCAT(badan_amil_zakat.nama_badan_amil_zakat SEPARATOR ', ') AS nama_validasi_amil_zakat
-                        FROM validasi_mustahiq INNER JOIN amil_zakat
-                        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat) INNER JOIN badan_amil_zakat
-                        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
-                        WHERE validasi_mustahiq.id_mustahiq=idm )  AS nama_validasi_amil_zakat ,
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
