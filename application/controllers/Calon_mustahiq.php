@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @property Calon_mustahiq_model $Calon_mustahiq_model
+ * @property Rekomendasi_Calon_Mustahiq_model $Rekomendasi_Calon_Mustahiq_model
  */
 
 
@@ -12,7 +13,7 @@ class Calon_mustahiq extends CI_Controller
         parent::__construct();
 
         $this->load->model('Calon_mustahiq_model', '', TRUE); //inisialisasi model calon mustahiq
-
+        $this->load->model('Rekomendasi_Calon_Mustahiq_model', '', TRUE); //inisialisasi model Rekomendasi_Calon_Mustahiq_model
     }
 
     public function index()
@@ -191,6 +192,7 @@ class Calon_mustahiq extends CI_Controller
                 } else {
                     $action_calon_mustahiq = $this->Calon_mustahiq_model->insertcalon_mustahiq($calon_mustahiq);
                     if ($action_calon_mustahiq) {
+
                         $response['isSuccess'] = true;
                         $response['message'] = "berhasil menambah calon_mustahiq";
                         $detail_calon_mustahiq = $this->Calon_mustahiq_model->getLastcalon_mustahiq();
@@ -213,6 +215,14 @@ class Calon_mustahiq extends CI_Controller
                             );
                             $this->Calon_mustahiq_model->updatecalon_mustahiq($detail_calon_mustahiq['id_calon_mustahiq'], $calon_mustahiq);
                         }
+
+                        $rekomendasi = array(
+                            'id_calon_mustahiq' => $id_calon_mustahiq,
+                            'id_user' => $id_user_perekomendasi,
+                        );
+
+                       $this->Rekomendasi_Calon_Mustahiq_model->insertrekomendasi($rekomendasi);
+
                     } else {
                         $response['message'] = "gagal menambah calon_mustahiq";
                     }

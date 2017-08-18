@@ -253,6 +253,7 @@ FROM
     INNER JOIN badan_amil_zakat
         ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
         WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
+
                         calon_mustahiq.id_user_perekomendasi as idnya_id_user_perekomendasi,
                         (SELECT user.nama FROM user WHERE user.id_user = idnya_id_user_perekomendasi) AS nama_perekomendasi_calon_mustahiq,
 
