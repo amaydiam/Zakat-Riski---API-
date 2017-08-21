@@ -14,7 +14,7 @@ class Donasi_model extends CI_Model
     }
 
 
-    function get_donasi($page, $keyword = null)
+    function get_donasi($type,$tahun,$bulan, $page = null, $keyword = null)
     {
         if ($page == null || $page == 1) {
             $page = 1;
@@ -42,6 +42,14 @@ FROM
     INNER JOIN badan_amil_zakat 
         ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
         WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
+        (SELECT GROUP_CONCAT(amil_zakat.id_amil_zakat SEPARATOR ', ') AS id_nama_validasi_amil_zakat
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS id_nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -49,12 +57,39 @@ FROM
         $this->db->join('calon_mustahiq', 'calon_mustahiq.id_calon_mustahiq = mustahiq.id_calon_mustahiq');
         $this->db->join('amil_zakat', 'amil_zakat.id_amil_zakat = mustahiq.id_amil_zakat');
 
-        if ($keyword != null) {
-            $this->db->like('muzaki.no_identitas_muzaki', $keyword);
-            $this->db->or_like('muzaki.no_identitas_muzaki', $keyword, 'after');
-            $this->db->or_like('muzaki.no_identitas_muzaki', $keyword, 'before');
-            $this->db->group_by('muzaki.no_identitas_muzaki');
+
+
+        if ($type != "ALL") {
+            $this->db->where('donasi.id_amil_zakat', $type);
         }
+
+        if ($tahun != "ALL") {
+
+            if ($bulan != "ALL") {
+                $this->db->like('donasi.waktu_donasi', $tahun."-".$bulan."-", 'after');
+            }
+            else{
+                $this->db->like('donasi.waktu_donasi', $tahun."-", 'after');
+            }
+
+            if ($keyword != null) {
+                $this->db->or_like('muzaki.no_identitas_muzaki', $keyword);
+                $this->db->or_like('muzaki.no_identitas_muzaki', $keyword, 'after');
+                $this->db->or_like('muzaki.no_identitas_muzaki', $keyword, 'before');
+                $this->db->group_by('muzaki.no_identitas_muzaki');
+                $this->db->group_by('donasi.waktu_donasi');
+            }
+        }
+        else{
+            if ($keyword != null) {
+                $this->db->like('muzaki.no_identitas_muzaki', $keyword);
+                $this->db->or_like('muzaki.no_identitas_muzaki', $keyword, 'after');
+                $this->db->or_like('muzaki.no_identitas_muzaki', $keyword, 'before');
+                $this->db->group_by('muzaki.no_identitas_muzaki');
+            }
+        }
+
+
         $this->db->order_by('id_donasi', 'DESC');
         $this->db->limit($limit, $start);
         $query = $this->db->get();
@@ -84,6 +119,14 @@ FROM
     INNER JOIN badan_amil_zakat
         ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
         WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
+        (SELECT GROUP_CONCAT(amil_zakat.id_amil_zakat SEPARATOR ', ') AS id_nama_validasi_amil_zakat
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS id_nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -117,6 +160,14 @@ FROM
     INNER JOIN badan_amil_zakat
         ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
         WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
+        (SELECT GROUP_CONCAT(amil_zakat.id_amil_zakat SEPARATOR ', ') AS id_nama_validasi_amil_zakat
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS id_nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -158,6 +209,14 @@ FROM
     INNER JOIN badan_amil_zakat
         ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
         WHERE validasi_mustahiq.id_mustahiq=idm ) AS nama_validasi_amil_zakat,
+        (SELECT GROUP_CONCAT(amil_zakat.id_amil_zakat SEPARATOR ', ') AS id_nama_validasi_amil_zakat
+FROM
+    validasi_mustahiq
+    INNER JOIN amil_zakat
+        ON (validasi_mustahiq.id_amil_zakat = amil_zakat.id_amil_zakat)
+    INNER JOIN badan_amil_zakat
+        ON (amil_zakat.id_badan_amil_zakat = badan_amil_zakat.id_badan_amil_zakat)
+        WHERE validasi_mustahiq.id_mustahiq=idm ) AS id_nama_validasi_amil_zakat,
                         amil_zakat.*");
         $this->db->from('donasi');
         $this->db->join('mustahiq', 'donasi.id_mustahiq = mustahiq.id_mustahiq');
@@ -170,7 +229,6 @@ FROM
 
         return $query->row_array();
     }
-
 
 
 }

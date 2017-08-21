@@ -22,11 +22,11 @@ class Donasi extends CI_Controller
     }
 
 
-    function donasi($page = null,$keyword=null)
+    function donasi($type,$tahun,$bulan,$page = null,$keyword=null)
     {
         $response['isSuccess'] = true;
         $response['message'] = "berhasil";
-        $response['donasi'] = $this->Donasi_model->get_donasi($page,$keyword);
+        $response['donasi'] = $this->Donasi_model->get_donasi($type,$tahun,$bulan,$page,$keyword);
         echo json_encode($response);
     }
 
@@ -58,6 +58,7 @@ class Donasi extends CI_Controller
         $no_identitas_muzaki = $this->input->post('no_identitas_muzaki');
         $no_telp_muzaki = $this->input->post('no_telp_muzaki');
         $jumlah_donasi = $this->input->post('jumlah_donasi');
+        $id_amil_zakat = $this->input->post('id_amil_zakat');
 
         $foto_bukti_pembayaran = $this->input->post('foto_bukti_pembayaran');
 
@@ -70,6 +71,7 @@ class Donasi extends CI_Controller
             && $no_identitas_muzaki != null
             && $no_telp_muzaki != null
             && $jumlah_donasi != null
+            && $id_amil_zakat != null
         ) {
 
             if ($foto_bukti_pembayaran == null) {
@@ -103,6 +105,7 @@ class Donasi extends CI_Controller
                     'id_muzaki' => $data_muzaki["id_muzaki"],
                     'id_mustahiq' => $id_mustahiq,
                     'jumlah_donasi' => $jumlah_donasi,
+                    'id_amil_zakat' => $id_amil_zakat,
                     'keterangan' => $url_foto_bukti_pembayaran
 
                 );
