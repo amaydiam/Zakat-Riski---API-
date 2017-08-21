@@ -71,6 +71,9 @@ class Validasi_mustahiq extends CI_Controller
                 $action_mustahiq = $this->Mustahiq_model->insertmustahiq($mustahiq);
 
                 if ($action_mustahiq) {
+
+                    $detail_mustahiq = $this->Mustahiq_model->getLastmustahiq();
+
                     $validasi = array(
                         'id_mustahiq' => $detail_mustahiq["id_mustahiq"],
                         'id_amil_zakat' => $id_amil_zakat,
@@ -81,7 +84,6 @@ class Validasi_mustahiq extends CI_Controller
                     if ($action_validasi) {
                         $response['isSuccess'] = true;
                         $response['message'] = "Mustahiq telah divalidasi";
-                        $detail_mustahiq = $this->Mustahiq_model->getmustahiqById($detail_mustahiq["id_mustahiq"]);
                         $response['mustahiq'] = $detail_mustahiq;
 
                     } else {
