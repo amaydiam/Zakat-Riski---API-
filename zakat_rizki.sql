@@ -58,6 +58,8 @@ CREATE TABLE `calon_mustahiq` (
   `longitude_calon_mustahiq` varchar(20) DEFAULT '0',
   `no_identitas_calon_mustahiq` varchar(200) DEFAULT NULL,
   `no_telp_calon_mustahiq` varchar(100) DEFAULT NULL,
+  `status_tempat_tinggal_calon_mustahiq` enum('Rumah Pribadi','Sewa') DEFAULT NULL,
+  `status_pekerjaan_calon_mustahiq` enum('Tetap','Tidak Tetap','Tidak Memiliki Pekerjaan') DEFAULT NULL,
   `id_user_perekomendasi` int(10) DEFAULT NULL,
   `alasan_perekomendasi_calon_mustahiq` text,
   `photo_1` text,
@@ -68,11 +70,11 @@ CREATE TABLE `calon_mustahiq` (
   `caption_photo_3` text,
   `status_calon_mustahiq` enum('Aktif','Tidak Aktif') DEFAULT 'Aktif',
   PRIMARY KEY (`id_calon_mustahiq`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `calon_mustahiq` */
 
-insert  into `calon_mustahiq`(`id_calon_mustahiq`,`nama_calon_mustahiq`,`alamat_calon_mustahiq`,`latitude_calon_mustahiq`,`longitude_calon_mustahiq`,`no_identitas_calon_mustahiq`,`no_telp_calon_mustahiq`,`id_user_perekomendasi`,`alasan_perekomendasi_calon_mustahiq`,`photo_1`,`photo_2`,`photo_3`,`caption_photo_1`,`caption_photo_2`,`caption_photo_3`,`status_calon_mustahiq`) values (1,'Maya','Jl. Kakak Tua Blok B3 No.27, Pamulang Tim., Pamulang, Kota Tangerang Selatan, Banten 15417, Indonesia','-6.3417975000000055','106.74754296874997','123','123',12,'ada deh','/source/upload/image/photo_calon_mustahiq/photo_1_1503287829.jpg','/source/upload/image/photo_calon_mustahiq/photo_2_1503287829.jpg','/source/upload/image/photo_calon_mustahiq/photo_3_1503287829.jpg','zbbz','zbxb','xbbxnx','Aktif');
+insert  into `calon_mustahiq`(`id_calon_mustahiq`,`nama_calon_mustahiq`,`alamat_calon_mustahiq`,`latitude_calon_mustahiq`,`longitude_calon_mustahiq`,`no_identitas_calon_mustahiq`,`no_telp_calon_mustahiq`,`status_tempat_tinggal_calon_mustahiq`,`status_pekerjaan_calon_mustahiq`,`id_user_perekomendasi`,`alasan_perekomendasi_calon_mustahiq`,`photo_1`,`photo_2`,`photo_3`,`caption_photo_1`,`caption_photo_2`,`caption_photo_3`,`status_calon_mustahiq`) values (1,'Maya','Jl. Kakak Tua Blok B3 No.27, Pamulang Tim., Pamulang, Kota Tangerang Selatan, Banten 15417, Indonesia','-6.3417975000000055','106.74754296874997','123','123',NULL,NULL,12,'ada deh','/source/upload/image/photo_calon_mustahiq/photo_1_1503287829.jpg','/source/upload/image/photo_calon_mustahiq/photo_2_1503287829.jpg','/source/upload/image/photo_calon_mustahiq/photo_3_1503287829.jpg','zbbz','zbxb','xbbxnx','Aktif'),(2,'Dika','Jl. Pamulang Permai I, Pamulang Bar., Pamulang, Kota Tangerang Selatan, Banten 15417, Indonesia','-6.3432624999999865','106.73608203124999','1236','123','Rumah Pribadi','Tidak Tetap',12,'sbhsjd','/source/upload/image/photo_calon_mustahiq/photo_1_1505216937.jpg','/source/upload/image/photo_calon_mustahiq/photo_2_1505216937.jpg','/source/upload/image/photo_calon_mustahiq/photo_3_1505216937.jpg','tes','tesa','heh','Aktif');
 
 /*Table structure for table `donasi` */
 
@@ -153,11 +155,11 @@ CREATE TABLE `rekomendasi_calon_mustahiq` (
   `id_calon_mustahiq` int(10) DEFAULT NULL,
   `id_user` int(10) DEFAULT NULL,
   PRIMARY KEY (`id_rekomendasi_calon_mustahiq`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `rekomendasi_calon_mustahiq` */
 
-insert  into `rekomendasi_calon_mustahiq`(`id_rekomendasi_calon_mustahiq`,`id_calon_mustahiq`,`id_user`) values (1,NULL,12);
+insert  into `rekomendasi_calon_mustahiq`(`id_rekomendasi_calon_mustahiq`,`id_calon_mustahiq`,`id_user`) values (1,NULL,12),(2,NULL,12);
 
 /*Table structure for table `user` */
 
