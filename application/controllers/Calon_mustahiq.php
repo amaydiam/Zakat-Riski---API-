@@ -59,6 +59,8 @@ class Calon_mustahiq extends CI_Controller
         $longitude_calon_mustahiq = $this->input->post('longitude_calon_mustahiq');
         $no_identitas_calon_mustahiq = $this->input->post('no_identitas_calon_mustahiq');
         $no_telp_calon_mustahiq = $this->input->post('no_telp_calon_mustahiq');
+        $status_tempat_tinggal_calon_mustahiq= $this->input->post('status_tempat_tinggal_calon_mustahiq');
+        $status_pekerjaan_calon_mustahiq = $this->input->post('status_pekerjaan_calon_mustahiq');
         $id_user_perekomendasi= $this->input->post('id_user_perekomendasi');
         $alasan_perekomendasi_calon_mustahiq= $this->input->post('alasan_perekomendasi_calon_mustahiq');
         $photo_1= $this->input->post('photo_1');
@@ -77,6 +79,8 @@ class Calon_mustahiq extends CI_Controller
             || $longitude_calon_mustahiq != null
             || $no_identitas_calon_mustahiq != null
             || $no_telp_calon_mustahiq != null
+            || $status_tempat_tinggal_calon_mustahiq != null
+            || $status_pekerjaan_calon_mustahiq != null
             || $id_user_perekomendasi!= null
             || $alasan_perekomendasi_calon_mustahiq!= null
             || $photo_1!= null
@@ -93,6 +97,8 @@ class Calon_mustahiq extends CI_Controller
                 'longitude_calon_mustahiq' => $longitude_calon_mustahiq,
                 'no_identitas_calon_mustahiq' => $no_identitas_calon_mustahiq,
                 'no_telp_calon_mustahiq' => $no_telp_calon_mustahiq,
+                'status_tempat_tinggal_calon_mustahiq' => $status_tempat_tinggal_calon_mustahiq,
+                'status_pekerjaan_calon_mustahiq' => $status_pekerjaan_calon_mustahiq,
                 'id_user_perekomendasi' => $id_user_perekomendasi,
                 'alasan_perekomendasi_calon_mustahiq' => $alasan_perekomendasi_calon_mustahiq,
                 'caption_photo_1' => $caption_photo_1,
